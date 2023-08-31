@@ -3,6 +3,13 @@ import sqlite3
 # Creates an empty database
 connection = sqlite3.connect("gta.db")
 
+# Cursor Object is needed to use SQL commands
+# This is needed for communication with the database
+cursor = connection.cursor()
+
+# Use Cursor Object to create a table with SQL within the gta database
+cursor.execute("CREATE TABLE gta (release_year integer, release_name text, city text)")
+
 release_list = [
     (1997, "Grand Theft Auto", "state of New Guernsey"),
     (1999, "Grand Theft Auto 2", "Anywhere, USA"),
@@ -13,4 +20,8 @@ release_list = [
     (2013, "Grand Theft Auto V", "Los Santos")
 ]
 
+# Method Executemany is necessary for inserting multiple rows into a table
+cursor.executemany("INSERT INTO gta VALUES (?, ?, ?)", release_list)
+
+# Closed connection to database
 connection.close()
