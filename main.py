@@ -23,5 +23,16 @@ release_list = [
 # Method Executemany is necessary for inserting multiple rows into a table
 cursor.executemany("INSERT INTO gta VALUES (?, ?, ?)", release_list)
 
+# Reads from table and prints every row in the table
+for row in cursor.execute("SELECT * FROM gta"):
+    print(row)
+
+# Selects specific rows from gta table
+# Set 'c' to be represented as a key where its value is 'Liberty City'
+print("******************************************")
+cursor.execute("SELECT * FROM gta WHERE city=:c", {"c": "Liberty City"})
+gta_search = cursor.fetchall()
+print(gta_search)
+
 # Closed connection to database
 connection.close()
