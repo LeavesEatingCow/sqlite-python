@@ -34,5 +34,12 @@ cursor.execute("SELECT * FROM gta WHERE city=:c", {"c": "Liberty City"})
 gta_search = cursor.fetchall()
 print(gta_search)
 
+cursor.execute("CREATE TABLE cities (gta_city text, real_city text)")
+cursor.execute("INSERT INTO cities VALUES (?, ?)", ("Liberty City", "New York"))
+cursor.execute("SELECT * FROM cities WHERE gta_city=:c", {"c": "Liberty City"})
+cities_search = cursor.fetchall()
+
+print(cities_search)
+
 # Closed connection to database
 connection.close()
